@@ -8,7 +8,11 @@ packages = [{include = "zero_pm"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+csv-to-sqlite = "^2.1.3"
 
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.1.0"
 
 [build-system]
 requires = ["poetry-core"]

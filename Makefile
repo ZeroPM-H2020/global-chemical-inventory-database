@@ -5,8 +5,7 @@ init-env: ## Install python packages
 	poetry shell
 
 load-csv: ## Load csv files
-	poetry shell 
-	python src/load_csv.py 
+	poetry run python src/load_csv.py 
 
 fix-keys: ## Fix table keys
 	sqlite3 output.sqlite < ./src/recreate_tables.sql

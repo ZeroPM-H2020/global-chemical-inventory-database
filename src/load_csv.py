@@ -12,8 +12,14 @@ input_files = [
     "./csv_files/a5_source.csv",
     "./csv_files/b1_inventories.csv",
     "./csv_files/b2_inventory_summary.csv",
-    "./csv_files/c1_api_ids.csv",
+    "./csv_files/c1_apis.csv",
     "./csv_files/c2_api_ready_query.csv",
+    "./csv_files/c3_api_results.csv",
+    "./csv_files/c4_consensus_index.csv",
+    "./csv_files/c5_consensus_score.csv",
+    "./csv_files/d1_cleanventory_chemicals.csv",
+    "./csv_files/d2_zeropm_chemicals.csv",
+    "./csv_files/e1_substances.csv",
 ]
 
 csv_to_sqlite.write_csv(input_files, "output.sqlite", options)

@@ -22,4 +22,4 @@ input_files = [
     "./csv_files/e1_substances.csv",
 ]
 
-csv_to_sqlite.write_csv(input_files, "output.sqlite", options)
+csv_to_sqlite.write_csv(input_files, "zeropm.sqlite", options)

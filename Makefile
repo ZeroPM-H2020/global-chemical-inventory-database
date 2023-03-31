@@ -8,10 +8,13 @@ load-csv: ## Load csv files
 	poetry run python src/load_csv.py 
 
 fix-keys: ## Fix table keys
-	sqlite3 output.sqlite < ./src/recreate_tables.sql
+	sqlite3 zeropm.sqlite < ./src/recreate_tables.sql
+
+serve: ## Serve the database
+	datasette serve zeropm.sqlite
 
 clear: ## Clear
-	rm output.sqlite
+	rm zeropm.sqlite
 
 #Reference: https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
 help:

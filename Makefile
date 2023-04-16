@@ -1,5 +1,7 @@
 .PHONY: help
 
+container_id = $(shell docker ps -lq)
+
 init-env: ## Install python packages
 	poetry install
 	poetry shell
@@ -16,6 +18,12 @@ serve: ## Serve the database
 serve-docker: ## Serve the database using docker image
 	docker pull datasetteproject/datasette
 	docker run -p 8001:8001 -v `pwd`:/mnt datasetteproject/datasette datasette -p 8001 -h 0.0.0.0 /mnt/zeropm.sqlite
+
+serve-docker-graphql: ## Serve the database using docker image with graphql plugin
+	docker pull datasetteproject/datasette
+	docker run datasetteproject/datasette pip install datasette-graphql
+	docker commit $(container_id) datasette-with-plugins
+	docker run -p 8001:8001 -v `pwd`:/mnt datasette-with-plugins datasette -p 8001 -h 0.0.0.0 /mnt/zeropm.sqlite
 
 up: ## Start the container
 	docker-compose up -d

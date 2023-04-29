@@ -1,30 +1,96 @@
--- Create new tables with PRIMARY KEY and FOREIGN KEY
-CREATE TABLE [a1_global_regions_modified] (
-        [region_id] integer PRIMARY KEY,
-        [region] text
+-- Step 1. Create new tables with PRIMARY KEY and FOREIGN KEY
+CREATE TABLE [api_ids_modified] (
+        [api_id] integer PRIMARY KEY,
+        [name] text,
+        [source] text
 );
 
-CREATE TABLE [a2_region_country_index_modified] (
-        [country_id] integer,
-        [region_id] integer,
-        FOREIGN KEY (country_id) REFERENCES a3_countries_modified(country_id),
-        FOREIGN KEY ( region_id) REFERENCES a1_global_regions_modified(region_id)
-        
+CREATE TABLE [api_ready_query_modified] (
+        [query_id] integer PRIMARY KEY,
+        [query] text,
+        [type] text
 );
 
-CREATE TABLE [a3_countries_modified] (
+CREATE TABLE [api_results_modified] (
+        [query_id] integer,
+        [api_id] integer,
+        [inchi_id] integer,
+        [rank] integer,
+        FOREIGN KEY (query_id) REFERENCES api_ready_query(query_id),
+        FOREIGN KEY (api_id) REFERENCES api_ids(api_id),
+        FOREIGN KEY (inchi_id) REFERENCES substances(inchi_id)
+);
+
+-- TODO: ccc_data 
+
+CREATE TABLE [cleanventory_chemicals_modified] (
+        [cleanventory_id] integer PRIMARY KEY,
+        [inventory_id] integer,
+        [inchi_id] integer,
+        FOREIGN KEY (inventory_id) REFERENCES inventory_summary(inventory_id),
+        FOREIGN KEY (inchi_id) REFERENCES substances(inchi_id)
+);
+
+CREATE TABLE [consensus_index_modified] (
+        [inventory_id] integer,
+        [inchi_id] text,
+        [consensus_score] text,
+        FOREIGN KEY (inventory_id) REFERENCES inventory_summary(inventory_id),
+        FOREIGN KEY (inchi_id) REFERENCES substances(inchi_id)
+);
+
+CREATE TABLE [consensus_score_modified] (
+        [inventory_id] integer,
+        [inchi_id] text,
+        [inventory_id_score] text,
+        FOREIGN KEY (inventory_id) REFERENCES inventory_summary(inventory_id),
+        FOREIGN KEY (inchi_id) REFERENCES substances(inchi_id)
+);
+
+CREATE TABLE [countries_modified] (
         [country_id] integer PRIMARY KEY,
         [country] text
 );
 
-CREATE TABLE [a4_country_source_index_modified] (
+CREATE TABLE [country_source_index_modified] (
         [country_id] integer,
         [source_id] integer,
-        FOREIGN KEY (country_id) REFERENCES a3_countries_modified(country_id),
-        FOREIGN KEY (source_id) REFERENCES a5_source_modified(source_id)
+        FOREIGN KEY (country_id) REFERENCES countries(country_id),
+        FOREIGN KEY (source_id) REFERENCES sources(source_id)
 );
 
-CREATE TABLE [a5_source_modified] (
+CREATE TABLE [global_regions_modified] (
+        [region_id] integer PRIMARY KEY,
+        [region] text
+);
+
+CREATE TABLE [inventories_modified] (
+        [inventory_id] integer PRIMARY KEY,
+        [cas_no] text,
+        [names] text,
+        [source_id] integer,
+        FOREIGN KEY (source_id) REFERENCES sources(source_id)
+);
+
+CREATE TABLE [inventory_summary_modified] (
+        [inventory_id] integer,
+        [query_id] integer,
+        FOREIGN KEY (inventory_id) REFERENCES inventories(inventory_id),
+        FOREIGN KEY (query_id) REFERENCES api_ready_query(query_id)
+);
+
+-- TODO: openbabel
+-- TODO: pubchem_data
+
+CREATE TABLE [region_country_index_modified] (
+        [country_id] integer,
+        [region_id] integer,
+        FOREIGN KEY (country_id) REFERENCES countries(country_id),
+        FOREIGN KEY ( region_id) REFERENCES global_regions(region_id)
+        
+);
+
+CREATE TABLE [sources_modified] (
         [source_id] integer PRIMARY KEY,
         [source_name] text,
         [link] text,
@@ -34,75 +100,7 @@ CREATE TABLE [a5_source_modified] (
         [comments] text
 );
 
-CREATE TABLE [b1_inventories_modified] (
-        [inventory_id] integer PRIMARY KEY,
-        [cas_no] text,
-        [names] text,
-        [source_id] integer,
-        FOREIGN KEY (source_id) REFERENCES a5_source_modified(source_id)
-);
-
-CREATE TABLE [b2_inventory_summary_modified] (
-        [inventory_id] integer,
-        [query_id] integer,
-        FOREIGN KEY (inventory_id) REFERENCES b1_inventories_modified(inventory_id),
-        FOREIGN KEY (query_id) REFERENCES c2_api_ready_query_modified(query_id)
-);
-
-CREATE TABLE [c1_apis_modified] (
-        [api_id] integer PRIMARY KEY,
-        [name] text,
-        [source] text
-);
-
-
-CREATE TABLE [c2_api_ready_query_modified] (
-        [query_id] integer PRIMARY KEY,
-        [query] text,
-        [type] text
-);
-
-CREATE TABLE [c3_api_results_modified] (
-        [query_id] integer,
-        [api_id] integer,
-        [inchi_id] integer,
-        [rank] integer,
-        FOREIGN KEY (query_id) REFERENCES c2_api_ready_query_modified(query_id),
-        FOREIGN KEY (api_id) REFERENCES c1_apis_modified(api_id),
-        FOREIGN KEY (inchi_id) REFERENCES e1_substances_modified(inchi_id)
-);
-
-CREATE TABLE [c4_consensus_index_modified] (
-        [inventory_id] integer,
-        [inchi_id] text,
-        [consensus_score] text,
-        FOREIGN KEY (inventory_id) REFERENCES b1_inventory_summary_modified(inventory_id),
-        FOREIGN KEY (inchi_id) REFERENCES e1_substances_modified(inchi_id)
-);
-
-CREATE TABLE [c5_consensus_score_modified] (
-        [inventory_id] integer,
-        [inchi_id] text,
-        [inventory_id_score] text,
-        FOREIGN KEY (inventory_id) REFERENCES b1_inventory_summary_modified(inventory_id),
-        FOREIGN KEY (inchi_id) REFERENCES e1_substances_modified(inchi_id)
-);
-
-CREATE TABLE [d1_cleanventory_chemicals_modified] (
-        [cleanventory_id] integer PRIMARY KEY,
-        [inventory_id] integer,
-        [inchi_id] integer,
-        FOREIGN KEY (inventory_id) REFERENCES b1_inventory_summary_modified(inventory_id),
-        FOREIGN KEY (inchi_id) REFERENCES e1_substances_modified(inchi_id)
-);
-
-CREATE TABLE [d2_zeropm_chemicals_modified] (
-        [zeropm_id] integer PRIMARY KEY,
-        [inchi_id] integer,
-        FOREIGN KEY (inchi_id) REFERENCES e1_substances_modified(inchi_id)
-);
-
-CREATE TABLE [e1_substances_modified] (
+CREATE TABLE [substances_modified] (
         [inchi] text,
         [inchi_id] integer PRIMARY KEY,
         [pubchem_cid] text,
@@ -110,40 +108,83 @@ CREATE TABLE [e1_substances_modified] (
         [chemspider_id] text
 );
 
-
--- Copy data from old tables to new tables
-INSERT INTO a1_global_regions_modified SELECT * FROM a1_global_regions;
-INSERT INTO a2_region_country_index_modified SELECT * FROM a2_region_country_index;
-INSERT INTO a3_countries_modified SELECT * FROM a3_countries;
-INSERT INTO a4_country_source_index_modified SELECT * FROM a4_country_source_index;
-INSERT INTO a5_source_modified SELECT * FROM a5_source;
-INSERT INTO b1_inventories_modified SELECT * FROM b1_inventories;
-INSERT INTO b2_inventory_summary_modified SELECT * FROM b2_inventory_summary;
-INSERT INTO c1_apis_modified SELECT * FROM c1_apis;
-INSERT INTO c2_api_ready_query_modified SELECT * FROM c2_api_ready_query;
-INSERT INTO c3_api_results_modified SELECT * FROM c3_api_results;
-INSERT INTO c4_consensus_index_modified SELECT * FROM c4_consensus_index;
-INSERT INTO c5_consensus_score_modified SELECT * FROM c5_consensus_score;
-INSERT INTO d1_cleanventory_chemicals_modified SELECT * FROM d1_cleanventory_chemicals;
-INSERT INTO d2_zeropm_chemicals_modified SELECT * FROM d2_zeropm_chemicals;
-INSERT INTO e1_substances_modified SELECT * FROM e1_substances;
+CREATE TABLE [zeropm_chemicals_modified] (
+        [zeropm_id] integer PRIMARY KEY,
+        [inchi_id] integer,
+        FOREIGN KEY (inchi_id) REFERENCES substances(inchi_id)
+);
 
 
+-- Step 2. Copy data from old tables to new temp tables
+INSERT INTO api_ids_modified SELECT * FROM api_ids;
+INSERT INTO api_ready_query_modified SELECT * FROM api_ready_query;
+INSERT INTO api_results_modified SELECT * FROM api_results;
+-- TODO: ccc_data 
+INSERT INTO cleanventory_chemicals_modified SELECT * FROM cleanventory_chemicals;
+INSERT INTO consensus_index_modified SELECT * FROM consensus_index;
+INSERT INTO consensus_score_modified SELECT * FROM consensus_score;
+INSERT INTO countries_modified SELECT * FROM countries;
+INSERT INTO country_source_index_modified SELECT * FROM country_source_index;
+INSERT INTO global_regions_modified SELECT * FROM global_regions;
+INSERT INTO inventories_modified SELECT * FROM inventories;
+INSERT INTO inventory_summary_modified SELECT * FROM inventory_summary;
+-- TODO: openbabel
+-- TODO: pubchem_data
+INSERT INTO region_country_index_modified SELECT * FROM region_country_index;
+INSERT INTO sources_modified SELECT * FROM sources;
+INSERT INTO substances_modified SELECT * FROM substances;
+INSERT INTO zeropm_chemicals_modified SELECT * FROM zeropm_chemicals;
 
 
--- Delete old tables
-DROP TABLE a1_global_regions;
-DROP TABLE a2_region_country_index;
-DROP TABLE a3_countries;
-DROP TABLE a4_country_source_index;
-DROP TABLE a5_source;
-DROP TABLE b1_inventories;
-DROP TABLE b2_inventory_summary;
-DROP TABLE c1_apis;
-DROP TABLE c2_api_ready_query;
-DROP TABLE c3_api_results;
-DROP TABLE c4_consensus_index;
-DROP TABLE c5_consensus_score;
-DROP TABLE d1_cleanventory_chemicals;
-DROP TABLE d2_zeropm_chemicals;
-DROP TABLE e1_substances;
+
+
+-- Step 3. Delete temp modified tables and rename tables
+DROP TABLE api_ids;
+ALTER TABLE api_ids_modified RENAME TO api_ids;
+
+DROP TABLE api_ready_query;
+ALTER TABLE api_ready_query_modified RENAME TO api_ready_query;
+
+DROP TABLE api_results;
+ALTER TABLE api_results_modified RENAME TO api_results;
+
+-- TODO: ccc_data 
+
+DROP TABLE cleanventory_chemicals;
+ALTER TABLE cleanventory_chemicals_modified RENAME TO cleanventory_chemicals;
+
+DROP TABLE consensus_index;
+ALTER TABLE consensus_index_modified RENAME TO consensus_index;
+
+DROP TABLE consensus_score;
+ALTER TABLE consensus_score_modified RENAME TO consensus_score;
+
+DROP TABLE countries;
+ALTER TABLE countries_modified RENAME TO countries;
+
+DROP TABLE country_source_index;
+ALTER TABLE country_source_index_modified RENAME TO country_source_index;
+
+DROP TABLE global_regions;
+ALTER TABLE global_regions_modified RENAME TO global_regions;
+
+DROP TABLE inventories;
+ALTER TABLE inventories_modified RENAME TO inventories;
+
+DROP TABLE inventory_summary;
+ALTER TABLE inventory_summary_modified RENAME TO inventory_summary;
+
+-- TODO: openbabel
+-- TODO: pubchem_data
+
+DROP TABLE region_country_index;
+ALTER TABLE region_country_index_modified RENAME TO region_country_index;
+
+DROP TABLE sources;
+ALTER TABLE sources_modified RENAME TO sources;
+
+DROP TABLE substances;
+ALTER TABLE substances_modified RENAME TO substances;
+
+DROP TABLE zeropm_chemicals;
+ALTER TABLE zeropm_chemicals_modified RENAME TO zeropm_chemicals;

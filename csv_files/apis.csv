@@ -1,0 +1,6 @@
+"api_id","name","source"
+1,"PubChem (compound)","https://pubchem.ncbi.nlm.nih.gov/"
+2,"PubChem (substance)","https://pubchem.ncbi.nlm.nih.gov/"
+3,"CAS Common Chemistry","https://commonchemistry.cas.org/"
+4,"NCI/CADD Chemical Identifier Resolver","https://cactus.nci.nih.gov/chemical/structure"
+5,"ChemSpider","https://www.chemspider.com/"

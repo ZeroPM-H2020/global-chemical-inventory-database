@@ -41,6 +41,17 @@ logs: ## Show docker container logs
 clear: ## Clear
 	rm zeropm.sqlite
 
+# Reference: https://github.com/git-lfs/git-lfs/blob/main/INSTALLING.md
+install-git-lfs-ubuntu: ## Install git lfs for ubuntu
+	curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+	sudo apt-get install git-lfs
+
+lfs-meta-data: ## Retrieve the latest lfs meta-data from remote
+	git lfs fetch --all
+
+lfs-pull: ## Pull lfs data copy from remote
+	git lfs pull
+
 #Reference: https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'

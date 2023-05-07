@@ -1,6 +1,6 @@
 ## Short term needs
 
-0. change names, get zeropm github access
+0. Done. change names, get zeropm github access
 
 1. More columns, tables will come in future.
 
@@ -11,10 +11,10 @@
 - Update the original csvs
 - Github - submit PRs
 
-3. Enable search, extract data in a flexible way.
+3. Done. Enable search, extract data in a flexible way.
 
-- Single table query - Rest API
-- Cross table query - SQL script
+- Done. Single table query - Rest API
+- Done. Cross table query - SQL script
 
 4. Hosting.
 

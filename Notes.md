@@ -1,28 +1,25 @@
 ## Short term needs
 
-0. change names, get zeropm github access
+0. Done. change names, get zeropm github access
 
 1. More columns, tables will come in future.
 
 - Need version control of the database
-
-2. Enable key partners to update the database in an easy way.
-
 - Update the original csvs
 - Github - submit PRs
 
-3. Enable search, extract data in a flexible way.
+2. Done. Enable search, extract data in a flexible way.
 
-- Single table query - Rest API
-- Cross table query - SQL script
+- Done. Single table query - Rest API
+- Done. Cross table query - SQL script
 
-4. Hosting.
+3. Hosting.
 
 - https://zenodo.org/ might be a good place to host static files, like csvs & dbs.
 - Host - ? Azure Container Apps
   - https://zeropm.eu/, get a subdomain
 
-5. Workshop - competence transfer
+4. Enable key partners to update the database in an easy way. Workshop - competence transfer
 
 - Enable zeropm team can manager this low-code system.
 

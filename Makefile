@@ -25,9 +25,16 @@ serve-docker-graphql: ## Serve the database using docker image with graphql plug
 	docker commit $(container_id) datasette-with-plugins
 	docker run -p 8001:8001 -v `pwd`:/mnt datasette-with-plugins datasette -p 8001 -h 0.0.0.0 /mnt/zeropm.sqlite
 
-publish-vercel: ## Publish to Vercel
+publish-vercel: ## Publish to Vercel - failed!
 	datasette install datasette-publish-vercel
 	datasette publish vercel zeropm.sqlite --project=zeropm  --token=${VERCEL_TOKEN}
+
+# install Google Cloud CLI: https://cloud.google.com/sdk/docs/install-sdk
+# https://zeropm-database-e3h7y7vjcq-lz.a.run.app
+publish-google-cloud-run: ## Publish to google cloud run
+	gcloud auth login
+	gcloud config set project zeropm
+	datasette publish cloudrun zeropm.sqlite --service=zeropm-database
 
 up: ## Start the container
 	docker-compose up -d

@@ -1,3 +1,3 @@
-Notes
+🚧 more readme will come soon ......
 
-- The raw csv files locates at "P:\2021\04\20210423\# WP5 Substance Grouping\#007 ZeroPM database"
+A test deployment of the database can be found at: https://zeropm-database-e3h7y7vjcq-lz.a.run.app/

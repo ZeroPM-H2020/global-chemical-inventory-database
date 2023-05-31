@@ -52,7 +52,7 @@ CREATE TABLE [countries_modified] (
         [country] text
 );
 
-CREATE TABLE [country_source_index_modified] (
+CREATE TABLE [country_sources_index_modified] (
         [country_id] integer,
         [source_id] integer,
         FOREIGN KEY (country_id) REFERENCES countries(country_id),
@@ -124,7 +124,7 @@ INSERT INTO cleanventory_chemicals_modified SELECT * FROM cleanventory_chemicals
 INSERT INTO consensus_index_modified SELECT * FROM consensus_index;
 INSERT INTO consensus_score_modified SELECT * FROM consensus_score;
 INSERT INTO countries_modified SELECT * FROM countries;
-INSERT INTO country_source_index_modified SELECT * FROM country_source_index;
+INSERT INTO country_sources_index_modified SELECT * FROM country_sources_index;
 INSERT INTO global_regions_modified SELECT * FROM global_regions;
 INSERT INTO inventories_modified SELECT * FROM inventories;
 INSERT INTO inventory_summary_modified SELECT * FROM inventory_summary;
@@ -162,8 +162,8 @@ ALTER TABLE consensus_score_modified RENAME TO consensus_score;
 DROP TABLE countries;
 ALTER TABLE countries_modified RENAME TO countries;
 
-DROP TABLE country_source_index;
-ALTER TABLE country_source_index_modified RENAME TO country_source_index;
+DROP TABLE country_sources_index;
+ALTER TABLE country_sources_index_modified RENAME TO country_sources_index;
 
 DROP TABLE global_regions;
 ALTER TABLE global_regions_modified RENAME TO global_regions;

@@ -1,5 +1,5 @@
 -- Step 1. Create new tables with PRIMARY KEY and FOREIGN KEY
-CREATE TABLE [api_ids_modified] (
+CREATE TABLE [api_services_modified] (
         [api_id] integer PRIMARY KEY,
         [name] text,
         [source] text
@@ -17,7 +17,7 @@ CREATE TABLE [api_results_modified] (
         [inchi_id] integer,
         [rank] integer,
         FOREIGN KEY (query_id) REFERENCES api_ready_query(query_id),
-        FOREIGN KEY (api_id) REFERENCES api_ids(api_id),
+        FOREIGN KEY (api_id) REFERENCES api_services(api_id),
         FOREIGN KEY (inchi_id) REFERENCES substances(inchi_id)
 );
 
@@ -116,7 +116,7 @@ CREATE TABLE [zeropm_chemicals_modified] (
 
 
 -- Step 2. Copy data from old tables to new temp tables
-INSERT INTO api_ids_modified SELECT * FROM api_ids;
+INSERT INTO api_services_modified SELECT * FROM api_services;
 INSERT INTO api_ready_query_modified SELECT * FROM api_ready_query;
 INSERT INTO api_results_modified SELECT * FROM api_results;
 -- TODO: ccc_data 
@@ -139,8 +139,8 @@ INSERT INTO zeropm_chemicals_modified SELECT * FROM zeropm_chemicals;
 
 
 -- Step 3. Delete temp modified tables and rename tables
-DROP TABLE api_ids;
-ALTER TABLE api_ids_modified RENAME TO api_ids;
+DROP TABLE api_services;
+ALTER TABLE api_services_modified RENAME TO api_services;
 
 DROP TABLE api_ready_query;
 ALTER TABLE api_ready_query_modified RENAME TO api_ready_query;

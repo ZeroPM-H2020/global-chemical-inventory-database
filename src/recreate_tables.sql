@@ -37,14 +37,6 @@ CREATE TABLE [consensus_index_modified] (
         FOREIGN KEY (inchi_id) REFERENCES substances(inchi_id)
 );
 
-CREATE TABLE [consensus_score_modified] (
-        [inventory_id] integer,
-        [inchi_id] text,
-        [inventory_id_score] text,
-        FOREIGN KEY (inventory_id) REFERENCES inventory_summary(inventory_id),
-        FOREIGN KEY (inchi_id) REFERENCES substances(inchi_id)
-);
-
 CREATE TABLE [countries_modified] (
         [country_id] integer PRIMARY KEY,
         [country] text
@@ -116,7 +108,6 @@ INSERT INTO api_ready_query_modified SELECT * FROM api_ready_query;
 INSERT INTO api_results_modified SELECT * FROM api_results;
 INSERT INTO cleanventory_chemicals_modified SELECT * FROM cleanventory_chemicals;
 INSERT INTO consensus_index_modified SELECT * FROM consensus_index;
-INSERT INTO consensus_score_modified SELECT * FROM consensus_score;
 INSERT INTO countries_modified SELECT * FROM countries;
 INSERT INTO country_sources_index_modified SELECT * FROM country_sources_index;
 INSERT INTO global_regions_modified SELECT * FROM global_regions;
@@ -145,9 +136,6 @@ ALTER TABLE cleanventory_chemicals_modified RENAME TO cleanventory_chemicals;
 
 DROP TABLE consensus_index;
 ALTER TABLE consensus_index_modified RENAME TO consensus_index;
-
-DROP TABLE consensus_score;
-ALTER TABLE consensus_score_modified RENAME TO consensus_score;
 
 DROP TABLE countries;
 ALTER TABLE countries_modified RENAME TO countries;

@@ -8,7 +8,6 @@ input_files = [
     "./csv_files/api_services.csv ",
     "./csv_files/api_ready_query.csv",
     "./csv_files/api_results.csv",
-    "./csv_files/ccc_data.csv",
     "./csv_files/cleanventory_chemicals.csv",
     "./csv_files/consensus_index.csv",
     "./csv_files/consensus_score.csv",

@@ -21,8 +21,6 @@ CREATE TABLE [api_results_modified] (
         FOREIGN KEY (inchi_id) REFERENCES substances(inchi_id)
 );
 
--- TODO: ccc_data 
-
 CREATE TABLE [cleanventory_chemicals_modified] (
         [cleanventory_id] integer PRIMARY KEY,
         [inventory_id] integer,
@@ -119,7 +117,6 @@ CREATE TABLE [zeropm_chemicals_modified] (
 INSERT INTO api_services_modified SELECT * FROM api_services;
 INSERT INTO api_ready_query_modified SELECT * FROM api_ready_query;
 INSERT INTO api_results_modified SELECT * FROM api_results;
--- TODO: ccc_data 
 INSERT INTO cleanventory_chemicals_modified SELECT * FROM cleanventory_chemicals;
 INSERT INTO consensus_index_modified SELECT * FROM consensus_index;
 INSERT INTO consensus_score_modified SELECT * FROM consensus_score;
@@ -147,8 +144,6 @@ ALTER TABLE api_ready_query_modified RENAME TO api_ready_query;
 
 DROP TABLE api_results;
 ALTER TABLE api_results_modified RENAME TO api_results;
-
--- TODO: ccc_data 
 
 DROP TABLE cleanventory_chemicals;
 ALTER TABLE cleanventory_chemicals_modified RENAME TO cleanventory_chemicals;

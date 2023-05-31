@@ -16,7 +16,6 @@ input_files = [
     "./csv_files/global_regions.csv",
     "./csv_files/inventories.csv",
     "./csv_files/inventory_summary.csv",
-    "./csv_files/openbabel.csv",
     "./csv_files/pubchem_data.csv",
     "./csv_files/region_country_index.csv",
     "./csv_files/sources.csv",

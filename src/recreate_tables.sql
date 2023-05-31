@@ -77,7 +77,6 @@ CREATE TABLE [inventory_summary_modified] (
         FOREIGN KEY (query_id) REFERENCES api_ready_query(query_id)
 );
 
--- TODO: openbabel
 -- TODO: pubchem_data
 
 CREATE TABLE [region_country_index_modified] (
@@ -125,7 +124,6 @@ INSERT INTO country_sources_index_modified SELECT * FROM country_sources_index;
 INSERT INTO global_regions_modified SELECT * FROM global_regions;
 INSERT INTO inventories_modified SELECT * FROM inventories;
 INSERT INTO inventory_summary_modified SELECT * FROM inventory_summary;
--- TODO: openbabel
 -- TODO: pubchem_data
 INSERT INTO region_country_index_modified SELECT * FROM region_country_index;
 INSERT INTO sources_modified SELECT * FROM sources;
@@ -169,7 +167,6 @@ ALTER TABLE inventories_modified RENAME TO inventories;
 DROP TABLE inventory_summary;
 ALTER TABLE inventory_summary_modified RENAME TO inventory_summary;
 
--- TODO: openbabel
 -- TODO: pubchem_data
 
 DROP TABLE region_country_index;

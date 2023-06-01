@@ -1,8 +1,7 @@
 SELECT
   country,
   source_name,
-  inchi,
-  ccc_cas
+  inchi
 FROM
   substances
   JOIN cleanventory_chemicals ON cleanventory_chemicals.inchi_id = substances.inchi_id

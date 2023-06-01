@@ -3,18 +3,25 @@
 container_id = $(shell docker ps -lq)
 db_name=zeropm-0.0.2.sqlite
 
-init-env: ## Install python packages
+step-a-init-env: ## Step 1: install python packages
 	poetry install
 	poetry shell
 
-load-csv: ## Load csv files
+step-b-load-csv: ## Step 2: load csv files
 	poetry run python src/load_csv.py 
 
-fix-keys: ## Fix table keys
+# for powershell
+# cat ./src/recreate_tables.sql | & C:/sqlite/sqlite3 $(db_name)
+step-c-fix-keys: ## Step 3: fix relationship between tables by adding primary & secondary keys
 	sqlite3 $(db_name) < ./src/recreate_tables.sql
 
-serve: ## Serve the database
+# if time out error, add additional time limit settings like:
+# datasette serve $(db_name) --setting sql_time_limit_ms 3500
+step-d-serve: ## Step 4: serve the database locally
 	datasette serve $(db_name)
+
+step-e-clear: ## Step 5: clear
+	rm $(db_name)
 
 serve-docker: ## Serve the database using docker image
 	docker pull datasetteproject/datasette
@@ -45,9 +52,6 @@ down: ## Stop the container
 
 logs: ## Show docker container logs
 	docker-compose logs -t
-
-clear: ## Clear
-	rm $(db_name)
 
 # Reference: https://github.com/git-lfs/git-lfs/blob/main/INSTALLING.md
 install-git-lfs-ubuntu: ## Install git lfs for ubuntu

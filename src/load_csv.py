@@ -21,4 +21,4 @@ input_files = [
     "./csv_files/zeropm_chemicals.csv",
 ]
 
-csv_to_sqlite.write_csv(input_files, "zeropm.sqlite", options)
+csv_to_sqlite.write_csv(input_files, "zeropm-0.0.2.sqlite", options)

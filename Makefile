@@ -1,6 +1,7 @@
 .PHONY: help
 
 container_id = $(shell docker ps -lq)
+db_name=zeropm-0.0.2.sqlite
 
 init-env: ## Install python packages
 	poetry install
@@ -10,31 +11,31 @@ load-csv: ## Load csv files
 	poetry run python src/load_csv.py 
 
 fix-keys: ## Fix table keys
-	sqlite3 zeropm.sqlite < ./src/recreate_tables.sql
+	sqlite3 $(db_name) < ./src/recreate_tables.sql
 
 serve: ## Serve the database
-	datasette serve zeropm.sqlite
+	datasette serve $(db_name)
 
 serve-docker: ## Serve the database using docker image
 	docker pull datasetteproject/datasette
-	docker run -p 8001:8001 -v `pwd`:/mnt datasetteproject/datasette datasette -p 8001 -h 0.0.0.0 /mnt/zeropm.sqlite
+	docker run -p 8001:8001 -v `pwd`:/mnt datasetteproject/datasette datasette -p 8001 -h 0.0.0.0 /mnt/$(db_name)
 
 serve-docker-graphql: ## Serve the database using docker image with graphql plugin
 	docker pull datasetteproject/datasette
 	docker run datasetteproject/datasette pip install datasette-graphql
 	docker commit $(container_id) datasette-with-plugins
-	docker run -p 8001:8001 -v `pwd`:/mnt datasette-with-plugins datasette -p 8001 -h 0.0.0.0 /mnt/zeropm.sqlite
+	docker run -p 8001:8001 -v `pwd`:/mnt datasette-with-plugins datasette -p 8001 -h 0.0.0.0 /mnt/$(db_name)
 
 publish-vercel: ## Publish to Vercel - failed!
 	datasette install datasette-publish-vercel
-	datasette publish vercel zeropm.sqlite --project=zeropm  --token=${VERCEL_TOKEN}
+	datasette publish vercel $(db_name) --project=zeropm  --token=${VERCEL_TOKEN}
 
 # install Google Cloud CLI: https://cloud.google.com/sdk/docs/install-sdk
 # https://zeropm-database-e3h7y7vjcq-lz.a.run.app
 publish-google-cloud-run: ## Publish to google cloud run
 	gcloud auth login
 	gcloud config set project zeropm
-	datasette publish cloudrun zeropm.sqlite --service=zeropm-database
+	datasette publish cloudrun $(db_name) --service=zeropm-database
 
 up: ## Start the container
 	docker-compose up -d
@@ -46,7 +47,7 @@ logs: ## Show docker container logs
 	docker-compose logs -t
 
 clear: ## Clear
-	rm zeropm.sqlite
+	rm $(db_name)
 
 # Reference: https://github.com/git-lfs/git-lfs/blob/main/INSTALLING.md
 install-git-lfs-ubuntu: ## Install git lfs for ubuntu

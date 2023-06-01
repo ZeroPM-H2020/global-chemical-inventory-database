@@ -1,3 +1,5 @@
 🚧 more readme will come soon ......
 
-A test deployment of the database can be found at: https://zeropm-database-e3h7y7vjcq-lz.a.run.app/
+A test deployment of the database can be found at: https://database.zeropm.eu/
+
+Eager to contribute, see [How to contribute](./how_to_contribute.md)

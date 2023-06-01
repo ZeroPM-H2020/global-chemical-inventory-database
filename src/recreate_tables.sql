@@ -33,6 +33,7 @@ CREATE TABLE [consensus_index_modified] (
         [inventory_id] integer,
         [inchi_id] text,
         [consensus_score] text,
+        [consensus_count] integer,
         FOREIGN KEY (inventory_id) REFERENCES inventory_summary(inventory_id),
         FOREIGN KEY (inchi_id) REFERENCES substances(inchi_id)
 );
@@ -56,8 +57,7 @@ CREATE TABLE [global_regions_modified] (
 
 CREATE TABLE [inventories_modified] (
         [inventory_id] integer PRIMARY KEY,
-        [cas_no] text,
-        [names] text,
+        [identifier] text,
         [source_id] integer,
         FOREIGN KEY (source_id) REFERENCES sources(source_id)
 );
@@ -90,9 +90,7 @@ CREATE TABLE [sources_modified] (
 CREATE TABLE [substances_modified] (
         [inchi] text,
         [inchi_id] integer PRIMARY KEY,
-        [pubchem_cid] text,
-        [ccc_cas] text,
-        [chemspider_id] text
+        [inchikey] text
 );
 
 CREATE TABLE [zeropm_chemicals_modified] (

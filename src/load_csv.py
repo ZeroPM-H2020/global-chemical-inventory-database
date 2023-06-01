@@ -19,6 +19,7 @@ input_files = [
     "./csv_files/sources.csv",
     "./csv_files/substances.csv",
     "./csv_files/zeropm_chemicals.csv",
+    "./csv_files/components.csv",
 ]
 
-csv_to_sqlite.write_csv(input_files, "zeropm-v0.0.2.sqlite", options)
+csv_to_sqlite.write_csv(input_files, "zeropm-v0.0.3.sqlite", options)

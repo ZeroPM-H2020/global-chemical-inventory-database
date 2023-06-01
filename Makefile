@@ -2,6 +2,7 @@
 
 container_id = $(shell docker ps -lq)
 db_name=zeropm-0.0.2.sqlite
+metadata=metadata.json
 
 step-a-init-env: ## Step 1: install python packages
 	poetry install
@@ -18,7 +19,7 @@ step-c-fix-keys: ## Step 3: fix relationship between tables by adding primary & 
 # if time out error, add additional time limit settings like:
 # datasette serve $(db_name) --setting sql_time_limit_ms 3500
 step-d-serve: ## Step 4: serve the database locally
-	datasette serve $(db_name)
+	datasette serve $(db_name) -m $(metadata)
 
 step-e-clear: ## Step 5: clear
 	rm $(db_name)
@@ -42,7 +43,7 @@ publish-vercel: ## Publish to Vercel - failed!
 publish-google-cloud-run: ## Publish to google cloud run
 	gcloud auth login
 	gcloud config set project zeropm
-	datasette publish cloudrun $(db_name) --service=zeropm-database
+	datasette publish cloudrun $(db_name) --service=zeropm-database -m $(metadata)
 
 up: ## Start the container
 	docker-compose up -d

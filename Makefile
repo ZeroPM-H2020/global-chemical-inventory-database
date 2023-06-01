@@ -1,7 +1,7 @@
 .PHONY: help
 
 container_id = $(shell docker ps -lq)
-db_name=zeropm-0.0.2.sqlite
+db_name=zeropm-v0.0.2.sqlite
 metadata=metadata.json
 
 step-a-init-env: ## Step 1: install python packages

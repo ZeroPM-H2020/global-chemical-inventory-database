@@ -105,6 +105,20 @@ CREATE TABLE [components_modified] (
         FOREIGN KEY (inchi_id) REFERENCES substances(inchi_id)
 );
 
+CREATE TABLE [multi_components_modified] (
+        [mc_id] integer PRIMARY KEY,
+        [inchi_id] integer,
+        FOREIGN KEY (inchi_id) REFERENCES substances(inchi_id)
+);
+
+CREATE TABLE [component_index_modified] (
+        [mc_id] integer,
+        [component_id] integer,
+        [component_frequency] integer,
+        FOREIGN KEY (mc_id) REFERENCES multi_components(mc_id),
+        FOREIGN KEY (component_id) REFERENCES components(component_id)
+);
+
 
 -- Step 2. Copy data from old tables to new temp tables
 INSERT INTO api_services_modified SELECT * FROM api_services;
@@ -171,3 +185,9 @@ ALTER TABLE zeropm_chemicals_modified RENAME TO zeropm_chemicals;
 
 DROP TABLE components;
 ALTER TABLE components_modified RENAME TO components;
+
+DROP TABLE multi_components;
+ALTER TABLE multi_components_modified RENAME TO multi_components;
+
+DROP TABLE component_index;
+ALTER TABLE component_index_modified RENAME TO component_index;

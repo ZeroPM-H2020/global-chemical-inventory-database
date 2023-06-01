@@ -136,6 +136,8 @@ INSERT INTO sources_modified SELECT * FROM sources;
 INSERT INTO substances_modified SELECT * FROM substances;
 INSERT INTO zeropm_chemicals_modified SELECT * FROM zeropm_chemicals;
 INSERT INTO components_modified SELECT * FROM components;
+INSERT INTO multi_components_modified SELECT * FROM multi_components;
+INSERT INTO component_index_modified SELECT * FROM component_index;
 
 
 

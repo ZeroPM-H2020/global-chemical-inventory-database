@@ -88,8 +88,8 @@ CREATE TABLE [sources_modified] (
 );
 
 CREATE TABLE [substances_modified] (
-        [inchi] text,
         [inchi_id] integer PRIMARY KEY,
+        [inchi] text,
         [inchikey] text
 );
 

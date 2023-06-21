@@ -99,6 +99,26 @@ CREATE TABLE [zeropm_chemicals_modified] (
         FOREIGN KEY (inchi_id) REFERENCES substances(inchi_id)
 );
 
+CREATE TABLE [components_modified] (
+        [component_id] integer PRIMARY KEY,
+        [inchi_id] integer,
+        FOREIGN KEY (inchi_id) REFERENCES substances(inchi_id)
+);
+
+CREATE TABLE [multi_components_modified] (
+        [mc_id] integer PRIMARY KEY,
+        [inchi_id] integer,
+        FOREIGN KEY (inchi_id) REFERENCES substances(inchi_id)
+);
+
+CREATE TABLE [component_index_modified] (
+        [mc_id] integer,
+        [component_id] integer,
+        [component_frequency] integer,
+        FOREIGN KEY (mc_id) REFERENCES multi_components(mc_id),
+        FOREIGN KEY (component_id) REFERENCES components(component_id)
+);
+
 
 -- Step 2. Copy data from old tables to new temp tables
 INSERT INTO api_services_modified SELECT * FROM api_services;
@@ -115,6 +135,9 @@ INSERT INTO region_country_index_modified SELECT * FROM region_country_index;
 INSERT INTO sources_modified SELECT * FROM sources;
 INSERT INTO substances_modified SELECT * FROM substances;
 INSERT INTO zeropm_chemicals_modified SELECT * FROM zeropm_chemicals;
+INSERT INTO components_modified SELECT * FROM components;
+INSERT INTO multi_components_modified SELECT * FROM multi_components;
+INSERT INTO component_index_modified SELECT * FROM component_index;
 
 
 
@@ -161,3 +184,12 @@ ALTER TABLE substances_modified RENAME TO substances;
 
 DROP TABLE zeropm_chemicals;
 ALTER TABLE zeropm_chemicals_modified RENAME TO zeropm_chemicals;
+
+DROP TABLE components;
+ALTER TABLE components_modified RENAME TO components;
+
+DROP TABLE multi_components;
+ALTER TABLE multi_components_modified RENAME TO multi_components;
+
+DROP TABLE component_index;
+ALTER TABLE component_index_modified RENAME TO component_index;

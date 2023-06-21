@@ -1,7 +1,7 @@
 .PHONY: help
 
 container_id = $(shell docker ps -lq)
-db_name=zeropm-v0.0.3.sqlite
+db_name=zeropm-v0-0-3.sqlite
 metadata=metadata.json
 
 step-a-init-env: ## Step 1: install python packages
@@ -12,7 +12,8 @@ step-b-load-csv: ## Step 2: load csv files
 	poetry run python src/load_csv.py 
 
 # for powershell
-# cat ./src/recreate_tables.sql | & C:/sqlite/sqlite3 $(db_name)
+# How to install sqlite3 on windows: https://www.sqlitetutorial.net/download-install-sqlite/
+# cat ./src/recreate_tables.sql | & C:/sqlite $(db_name)
 step-c-fix-keys: ## Step 3: fix relationship between tables by adding primary & secondary keys
 	sqlite3 $(db_name) < ./src/recreate_tables.sql
 
@@ -40,10 +41,11 @@ publish-vercel: ## Publish to Vercel - failed!
 
 # install Google Cloud CLI: https://cloud.google.com/sdk/docs/install-sdk
 # https://zeropm-database-e3h7y7vjcq-lz.a.run.app
+# gcloud auth login
 publish-google-cloud-run: ## Publish to google cloud run
-	gcloud auth login
+	gcloud config set run/region europe-north1
 	gcloud config set project zeropm
-	datasette publish cloudrun $(db_name) --service=zeropm-database -m $(metadata)
+	datasette publish cloudrun $(db_name) --service=zeropm-database -m $(metadata) --extra-options="--setting sql_time_limit_ms 3500"
 
 up: ## Start the container
 	docker-compose up -d

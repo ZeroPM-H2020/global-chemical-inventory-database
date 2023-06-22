@@ -1,5 +1,6 @@
 {
   "title": "Global Chemical Inventory",
+  "description": "This is a test version of the ZeroPM database, the Global Chemical Inventory",
   "license": "CC-BY-4.0",
   "license_url": "https://creativecommons.org/licenses/by/4.0/",
   "source": "ZeroPM GitHub",

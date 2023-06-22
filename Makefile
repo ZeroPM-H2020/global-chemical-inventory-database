@@ -2,10 +2,10 @@
 
 container_id = $(shell docker ps -lq)
 db_name=zeropm-v0-0-3.sqlite
-metadata=metadata.json
+metadata=metadata.yml
 
 step-a-init-env: ## Step 1: install python packages
-	poetry install
+#poetry install
 	poetry shell
 
 step-b-load-csv: ## Step 2: load csv files
@@ -20,7 +20,7 @@ step-c-fix-keys: ## Step 3: fix relationship between tables by adding primary & 
 # if time out error, add additional time limit settings like:
 # datasette serve $(db_name) --setting sql_time_limit_ms 3500
 step-d-serve: ## Step 4: serve the database locally
-	poetry run datasette serve $(db_name) -m $(metadata)
+	poetry run datasette serve $(db_name) -m $(metadata) --setting sql_time_limit_ms 15000
 
 step-e-clear: ## Step 5: clear
 	rm $(db_name)

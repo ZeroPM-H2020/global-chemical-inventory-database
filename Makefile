@@ -46,6 +46,7 @@ publish-google-cloud-run: ## Publish to google cloud run
 	gcloud config set run/region europe-north1
 	gcloud config set project zeropm
 	datasette publish cloudrun $(db_name) --service=zeropm-database -m $(metadata) --extra-options="--setting sql_time_limit_ms 3500"
+# datasette publish cloudrun zeropm-v0-0-3.sqlite --service=zeropm-database -m metadata.json --extra-options="--setting sql_time_limit_ms 3500"
 
 up: ## Start the container
 	docker-compose up -d

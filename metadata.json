@@ -1,9 +1,9 @@
 {
-  "title": "Global chemical inventory database",
-  "license": "CC Attribution 4.0 License",
+  "title": "Global Chemical Inventory",
+  "license": "CC-BY-4.0",
   "license_url": "https://creativecommons.org/licenses/by/4.0/",
-  "source": "ZeroPM",
+  "source": "ZeroPM GitHub",
   "source_url": "https://github.com/ZeroPM-H2020/global-chemical-inventory-database",
-  "about": "global-chemical-inventory-database",
+  "about": "ZeroPM Website",
   "about_url": "https://zeropm.eu/"
 }

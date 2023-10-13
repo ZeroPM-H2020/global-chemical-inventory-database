@@ -19,8 +19,9 @@ step-c-fix-keys: ## Step 3: fix relationship between tables by adding primary & 
 
 # if time out error, add additional time limit settings like:
 # datasette serve $(db_name) --setting sql_time_limit_ms 3500
+# poetry run datasette serve $(db_name) -m $(metadata) --setting sql_time_limit_ms 600000  --setting max_csv_mb 0 --template-dir templates
 step-d-serve: ## Step 4: serve the database locally
-	poetry run datasette serve $(db_name) -m $(metadata) --setting sql_time_limit_ms 600000 --setting max_returned_rows 1000000  --setting max_csv_mb 0
+	poetry run datasette serve $(db_name) -m $(metadata) --setting sql_time_limit_ms 600000  --setting max_csv_mb 0 --setting trace_debug 1 --template-dir templates
 
 step-e-clear: ## Step 5: clear
 	rm $(db_name)

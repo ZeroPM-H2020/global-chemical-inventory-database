@@ -9,8 +9,8 @@ packages = [{include = "zero_pm"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 csv-to-sqlite = "^2.1.3"
-datasette = "1.0a2"
 requests = "^2.28.2"
+datasette = {url = "https://github.com/fgregg/datasette/archive/refs/heads/no_limit_csv_publish.zip"}
 
 
 [tool.poetry.group.dev.dependencies]

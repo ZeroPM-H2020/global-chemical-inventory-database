@@ -12,4 +12,8 @@
 # download dockerfile to custom-image folder
 # wget https://github.com/simonw/datasette/raw/main/Dockerfile -O custom-image/Dockerfile
 
-docker build -f ./custom-image/Dockerfile . -t  yejiyang/datasette:no-limit-csv-publish-latest-v1
+# install from latest commit of no_limit_csv_publish branch
+# docker build -f ./custom-image/Dockerfile . -t  yejiyang/datasette:no-limit-csv-publish-latest-v1
+
+# install from 20221223 commit of no_limit_csv_publish branch
+docker build -f ./custom-image/Dockerfile . -t  yejiyang/datasette:no-limit-csv-publish-20221223-v4

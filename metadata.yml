@@ -36,7 +36,7 @@ databases:
           WHERE "Canada" in (countries.country);
         title: Canada
         description_html: |-
-          <p>This is a list of chemicals registered in Canada.</p>
+          <p>This is a list of chemicals registered in Canada. Note you need to click "Edit SQL" first if you want to "Download this data as a CSV Spreadsheet (All Rows)"</p>
       Europe_search:
         sql: |-
           SELECT country, inchi, identifier, source_name 
@@ -51,4 +51,4 @@ databases:
           WHERE "Europe" in (global_regions.region) ORDER BY countries.country_id;
         title: Europe
         description_html: |-
-          <p>This is a list of chemicals registered in Europe.</p>
+          <p>This is a list of chemicals registered in Europe. Note you need to click "Edit SQL" first if you want to "Download this data as a CSV Spreadsheet (All Rows)"</p>

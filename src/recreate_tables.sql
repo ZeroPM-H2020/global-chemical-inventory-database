@@ -121,14 +121,14 @@ CREATE TABLE [component_index_modified] (
 
 CREATE TABLE [pm_probabilites_modified] (
         [zeropm_id] integer,
-        [probability_of_not_p] float,
-        [probability_of_p_or_vp] float,
-        [probability_of_p] float,
-        [probability_of_vp] float,
-        [probability_of_not_m] float,
-        [probability_of_m_or_vm] float,
-        [probability_of_m] float,
-        [probability_of_vm] float,
+        [probability_of_not_p] real,
+        [probability_of_p_or_vp] real,
+        [probability_of_p] real,
+        [probability_of_vp] real,
+        [probability_of_not_m] real,
+        [probability_of_m_or_vm] real,
+        [probability_of_m] real,
+        [probability_of_vm] real,
         [n] integer,
         FOREIGN KEY (zeropm_id) REFERENCES zeropm_chemicals(zeropm_id)
 ); 

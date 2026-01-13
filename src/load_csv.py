@@ -22,6 +22,7 @@ input_files = [
     "./csv_files/components.csv",
     "./csv_files/multi_components.csv",
     "./csv_files/component_index.csv",
+    "./csv_files/pm_probabilities.csv",
 ]
 
-csv_to_sqlite.write_csv(input_files, "zeropm-v0-0-3.sqlite", options)
+csv_to_sqlite.write_csv(input_files, "zeropm-v0-0-4.sqlite", options)

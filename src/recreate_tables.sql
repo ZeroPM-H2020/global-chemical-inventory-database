@@ -119,6 +119,20 @@ CREATE TABLE [component_index_modified] (
         FOREIGN KEY (component_id) REFERENCES components(component_id)
 );
 
+CREATE TABLE [pm_probabilites_modified] (
+        [zeropm_id] integer,
+        [probability_of_not_p] real,
+        [probability_of_p_or_vp] real,
+        [probability_of_p] real,
+        [probability_of_vp] real,
+        [probability_of_not_m] real,
+        [probability_of_m_or_vm] real,
+        [probability_of_m] real,
+        [probability_of_vm] real,
+        [n] integer,
+        FOREIGN KEY (zeropm_id) REFERENCES zeropm_chemicals(zeropm_id)
+); 
+
 
 -- Step 2. Copy data from old tables to new temp tables
 INSERT INTO api_services_modified SELECT * FROM api_services;
@@ -138,6 +152,7 @@ INSERT INTO zeropm_chemicals_modified SELECT * FROM zeropm_chemicals;
 INSERT INTO components_modified SELECT * FROM components;
 INSERT INTO multi_components_modified SELECT * FROM multi_components;
 INSERT INTO component_index_modified SELECT * FROM component_index;
+INSERT INTO pm_probabilites_modified SELECT * FROM pm_probabilites;
 
 
 
@@ -193,3 +208,6 @@ ALTER TABLE multi_components_modified RENAME TO multi_components;
 
 DROP TABLE component_index;
 ALTER TABLE component_index_modified RENAME TO component_index;
+
+DROP TABLE pm_probabilites;
+ALTER TABLE pm_probabilites_modified RENAME TO pm_probabilites;

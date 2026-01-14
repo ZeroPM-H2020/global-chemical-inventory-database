@@ -33,10 +33,10 @@ databases:
             JOIN countries ON country_sources_index.country_id = countries.country_id
             JOIN region_country_index ON region_country_index.country_id = countries.country_id
             JOIN global_regions ON global_regions.region_id = region_country_index.region_id
-          WHERE "Canada" in (countries.country) LIMIT 100;
+          WHERE "Canada" in (countries.country);
         title: Canada
         description_html: |-
-          <p>This is a list of chemicals registered in Canada. Results are limited to 100 rows.</p>
+          <p>This is a list of chemicals registered in Canada. Note you need to click "Edit SQL" first if you want to "Download this data as a CSV Spreadsheet (All Rows)".</p>
       Europe_search:
         sql: |-
           SELECT country, inchi, identifier, source_name 
@@ -48,7 +48,7 @@ databases:
             JOIN countries ON country_sources_index.country_id = countries.country_id
             JOIN region_country_index ON region_country_index.country_id = countries.country_id
             JOIN global_regions ON global_regions.region_id = region_country_index.region_id
-          WHERE "Europe" in (global_regions.region) ORDER BY countries.country_id LIMIT 1000;
+          WHERE "Europe" in (global_regions.region) ORDER BY countries.country_id;
         title: Europe
         description_html: |-
-          <p>This is a list of chemicals registered in Europe. Results are limited to 1000 rows.</p>
+          <p>This is a list of chemicals registered in Europe. Note you need to click "Edit SQL" first if you want to "Download this data as a CSV Spreadsheet (All Rows)".</p>

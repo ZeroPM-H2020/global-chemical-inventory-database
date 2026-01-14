@@ -1,9 +1,9 @@
-version: '3'
+version: "3"
 services:
   datasette:
-    image: datasetteproject/datasette
+    image: yejiyang/datasette:no-limit-csv-publish-20221223-v5
     ports:
       - "8001:8001"
     volumes:
       - ${PWD}:/mnt
-    command: datasette -p 8001 -h 0.0.0.0 /mnt/zeropm.sqlite
+    command: datasette -p 8001 -h 0.0.0.0 /usr/local/data/zeropm-v0-0-3.sqlite -m /usr/local/data/metadata.yml --setting max_csv_mb 0 --template-dir /mnt/templates

@@ -1,6 +1,7 @@
 # 🚧 How to contribute
 
 Follow the steps abcd at [Makefile](./Makefile).
+Project overview and quick workflow: [Readme](./Readme.md).
 
 Please create a pull request and assign the following people as reviewers:
 raoul.wolf@ngi.no
@@ -28,6 +29,23 @@ jiang.ye@ngi.no
 1. No changes on data model, and only append new rows to existing table.
 
 2. Add new tables and its schema.
+
+## Project TODO list (suggested improvements)
+
+- [ ] Create a single version source (or script) to update all `zeropm-v0-0-X.sqlite` references.
+- [ ] Add a validation script to check row counts, PK/FK integrity, and empty tables.
+- [ ] Add CI to build the SQLite database and run validation on each PR.
+- [ ] Build a GitHub Actions pipeline to rebuild the `.sqlite` file when new CSVs are added.
+- [ ] Upgrade Datasette to the latest stable release and remove the dependency on the CSV size limit fork.
+- [ ] Document data provenance updates and required metadata changes for new CSV drops.
+- [ ] Add a release checklist including image push, tag, and deployment verification.
+- [ ] Add a compact schema reference (tables + keys) for contributors.
+
+## Deployment TODO list (suggested improvements)
+
+- [ ] Move the deployment to the NGI Scientific platform.
+- [ ] Automate the Docker build process.
+- [ ] Move the Docker image from a private Docker Hub repo to the organization account on GitHub.
 
 ## Bump database version number
 

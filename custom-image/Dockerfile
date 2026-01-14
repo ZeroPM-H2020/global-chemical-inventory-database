@@ -8,7 +8,10 @@ FROM python:3.9.2-slim-buster as build
 # install from 20221223 commit of no_limit_csv_publish branch: https://github.com/ZeroPM-H2020/datasette/archive/refs/heads/no_limit_csv_publish.zip
 ARG VERSION
 
-RUN apt-get update && \
+RUN sed -i 's|http://deb.debian.org/debian|http://archive.debian.org/debian|g' /etc/apt/sources.list && \
+    sed -i 's|http://security.debian.org/debian-security|http://archive.debian.org/debian-security|g' /etc/apt/sources.list && \
+    sed -i '/buster-updates/d' /etc/apt/sources.list && \
+    apt-get update -o Acquire::Check-Valid-Until=false && \
     apt-get install -y --no-install-recommends libsqlite3-mod-spatialite && \
     apt clean && \
     rm -rf /var/lib/apt && \
@@ -18,7 +21,7 @@ RUN pip install https://github.com/ZeroPM-H2020/datasette/archive/refs/heads/no_
     find /usr/local/lib -name '__pycache__' | xargs rm -r && \
     rm -rf /root/.cache/pip
 
-ADD zeropm-v0-0-3.sqlite /usr/local/data/zeropm-v0-0-3.sqlite
+ADD zeropm-v0-0-4.sqlite /usr/local/data/zeropm-v0-0-4.sqlite
 ADD metadata.yml /usr/local/data/metadata.yml
 ADD templates /usr/local/data/templates
 

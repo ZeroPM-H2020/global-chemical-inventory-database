@@ -28,3 +28,17 @@ jiang.ye@ngi.no
 1. No changes on data model, and only append new rows to existing table.
 
 2. Add new tables and its schema.
+
+## Bump database version number
+
+1. Pick the next version number and new filename like `zeropm-v0-0-X.sqlite`.
+2. Update the filename/version in `Makefile`, `src/load_csv.py`, `metadata.yml` (both the `description_html` text and `databases` key), `custom-image/Dockerfile`, `docker-compose.yml`, and `build-custom-image-with-db.sh`.
+3. Rebuild the database: `make step-b-load-csv` then `make step-c-fix-keys`.
+4. Spot-check the new file with `sqlite3 zeropm-v0-0-X.sqlite` if you changed data or schema.
+
+## Build a new docker image
+
+1. Ensure `custom-image/Dockerfile` references the new `zeropm-v0-0-X.sqlite` file and `metadata.yml`.
+2. Build the image with a new tag, either by editing `build-custom-image-with-db.sh` or running `docker build -f ./custom-image/Dockerfile . -t yejiyang/datasette:<new-tag>`.
+3. Update the image tag in `docker-compose.yml` to match the new tag.
+4. Test locally with `make up` or `make serve-docker`.

@@ -1,7 +1,7 @@
 version: "3"
 services:
   datasette:
-    image: yejiyang/datasette:no-limit-csv-publish-20221223-v6
+    image: yejiyang/datasette:no-limit-csv-publish-20221223-v7
     ports:
       - "8001:8001"
     volumes:

@@ -16,4 +16,4 @@
 # docker build -f ./custom-image/Dockerfile . -t  yejiyang/datasette:no-limit-csv-publish-latest-v1
 
 # install from 20221223 commit of no_limit_csv_publish branch
-docker build -f ./custom-image/Dockerfile . -t  yejiyang/datasette:no-limit-csv-publish-20221223-v6
+docker build -f ./custom-image/Dockerfile . -t  yejiyang/datasette:no-limit-csv-publish-20221223-v7

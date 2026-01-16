@@ -3,6 +3,7 @@
 This repository builds the ZeroPM Global Chemical Inventory SQLite database and serves it with Datasette.
 
 Deployment: https://database.zeropm.eu/
+Docker image: `yejiyang/datasette:no-limit-csv-publish-20221223-v7`
 
 ## Quick links
 
